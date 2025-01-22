@@ -1,6 +1,22 @@
 import numpy as np
 
-from pydantic import BaseModel
+from pydantic import BaseModel, validator
+from fastapi import FastAPI, File, UploadFile, HTTPException
+
+
+
+# Set the model to evaluation mode
+
+ALLOWED_CONTENT_TYPES = ["image/jpeg", "image/png"]
+
+class ImageInput(BaseModel):
+    image: UploadFile
+
+    # @validator('content_type')
+    # def validate_content_type(cls, value):
+    #     if value not in ALLOWED_CONTENT_TYPES:
+    #         raise ValueError(f"Invalid content type. Allowed types are: {', '.join(ALLOWED_CONTENT_TYPES)}")
+    #     return value
 
 
 class PredictionResponse(BaseModel):

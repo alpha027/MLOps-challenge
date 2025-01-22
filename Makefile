@@ -12,7 +12,7 @@ MODEL_PATH := ./ml/model/
 endif
 
 ifeq ($(MODEL_NAME),)
-MODEL_NAME := model.pkl
+MODEL_NAME := densenet121
 endif
 
 # Target section and Global definitions

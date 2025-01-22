@@ -2,6 +2,8 @@ from typing import Callable
 
 from fastapi import FastAPI
 
+from core.config import MODEL_NAME
+
 
 def preload_model():
     """
@@ -9,7 +11,9 @@ def preload_model():
     """
     from services.predict import MachineLearningModelHandlerScore
 
-    MachineLearningModelHandlerScore.get_model()
+    print("Preloading model called")
+
+    MachineLearningModelHandlerScore.get_model(MODEL_NAME)
 
 
 def create_start_app_handler(app: FastAPI) -> Callable:

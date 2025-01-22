@@ -4,38 +4,73 @@ from loguru import logger
 
 from core.errors import PredictException, ModelLoadException
 from core.config import MODEL_NAME, MODEL_PATH
+from models.registry import MODEL_REGISTRY
+import torch
+import json
 
 
 class MachineLearningModelHandlerScore(object):
     model = None
+    registry_name = None
+    classes = None
 
     @classmethod
-    def predict(cls, input, load_wrapper=None, method="predict"):
-        clf = cls.get_model(load_wrapper)
-        if hasattr(clf, method):
-            return getattr(clf, method)(input)
-        raise PredictException(f"'{method}' attribute is missing")
+    def predict(cls, input):
+
+        if cls.registry_name is not None:
+
+            transform = MODEL_REGISTRY[cls.registry_name].get("transform",
+                                                               None)
+            if transform is not None:
+                input = transform(input).unsqueeze(0)
+
+        with torch.no_grad():
+            outputs = cls.model(input)
+            _, predicted_class = outputs.max(1)
+
+        result = cls.classes[predicted_class.item()] if cls.classes is not None else str(predicted_class.item())
+        return {"response":result}
 
     @classmethod
-    def get_model(cls, load_wrapper):
-        if cls.model is None and load_wrapper:
-            cls.model = cls.load(load_wrapper)
-        return cls.model
+    def get_model(cls, model_name):
 
-    @staticmethod
-    def load(load_wrapper):
-        model = None
-        if MODEL_PATH.endswith("/"):
-            path = f"{MODEL_PATH}{MODEL_NAME}"
+        if cls.model is not None:
+            return cls.model
+
+        if model_name.lower() in list(MODEL_REGISTRY.keys()):
+            logger.info(f"Loading model {model_name}")
+            cls.registry_name = model_name.lower()
+            cls.model = cls.load(MODEL_REGISTRY[model_name.lower()])
+            classes_fname = MODEL_REGISTRY[model_name.lower()].get("class", None)
+            if classes_fname is not None:
+                cls.classes = cls.loadClasses(classes_fname)
+            if cls.model:
+                return cls.model
         else:
-            path = f"{MODEL_PATH}/{MODEL_NAME}"
-        if not os.path.exists(path):
-            message = f"Machine learning model at {path} not exists!"
-            logger.error(message)
-            raise FileNotFoundError(message)
-        model = load_wrapper(path)
-        if not model:
-            message = f"Model {model} could not load!"
+            message = f"Model {model_name} not found in registry!"
             logger.error(message)
             raise ModelLoadException(message)
+
+    @staticmethod
+    def loadClasses(classes_fname):
+        return json.load(open("app/models/labels/"+classes_fname))
+
+    @staticmethod
+    def load(load_parameters):
+
+        loading_method = load_parameters.get("loading_method")
+        if loading_method.get("hub", None) is not None:
+            model = torch.hub.load(
+                loading_method["hub"]["url"],
+                loading_method["hub"]["model"],
+                weights=loading_method["hub"]["weights"]
+            )
+        elif loading_method.get("file", None) is not None:
+            model = torch.load(loading_method["file"]["path"])
+        else:
+            message = f"Model loading method not found!"
+            logger.error(message)
+            raise ModelLoadException(message)
+        model.eval()
+
         return model

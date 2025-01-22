@@ -26,5 +26,5 @@ logging.basicConfig(
 logger.configure(handlers=[{"sink": sys.stderr, "level": LOGGING_LEVEL}])
 
 MODEL_PATH = config("MODEL_PATH", default="./ml/model/")
-MODEL_NAME = config("MODEL_NAME", default="model.pkl")
+MODEL_NAME = config("MODEL_NAME", default="densenet121")
 INPUT_EXAMPLE = config("INPUT_EXAMPLE", default="./ml/model/examples/example.json")
