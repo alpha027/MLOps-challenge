@@ -9,8 +9,7 @@ MODEL_REGISTRY = {
                 "url": "pytorch/vision:v0.10.0",
                 "method": "load",
                 "model": "densenet121",
-                "weights": "IMAGENET1K_V1",
-                "pretrained": True
+                "weights": "IMAGENET1K_V1"
             },
             "weights": {
                 "url": "https://download.pytorch.org/models/densenet121-a639ec97.pth",
@@ -19,8 +18,6 @@ MODEL_REGISTRY = {
             },
         },
         "class": "custom_imagenet.json",
-        "method": "predict",
-        "load_wrapper": "load_model",
         "transform": transforms.Compose([
                         transforms.Resize(256),
                         transforms.CenterCrop(224),

@@ -5,11 +5,12 @@ from loguru import logger
 from core.errors import PredictException, ModelLoadException
 from core.config import MODEL_NAME, MODEL_PATH
 from models.registry import MODEL_REGISTRY
+from services.validate import validate_registry
 import torch
 import json
 
 
-class MachineLearningModelHandlerScore(object):
+class DeepLearningModelHandlerScore(object):
     model = None
     registry_name = None
     classes = None
@@ -58,6 +59,7 @@ class MachineLearningModelHandlerScore(object):
     @staticmethod
     def load(load_parameters):
 
+        validate_registry(load_parameters)
         loading_method = load_parameters.get("loading_method")
         if loading_method.get("hub", None) is not None:
             model = torch.hub.load(
@@ -66,6 +68,7 @@ class MachineLearningModelHandlerScore(object):
                 weights=loading_method["hub"]["weights"]
             )
         elif loading_method.get("file", None) is not None:
+            # Implement the logic to load the model from a ".pth" file
             model = torch.load(loading_method["file"]["path"])
         else:
             message = f"Model loading method not found!"
