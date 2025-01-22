@@ -1,4 +1,4 @@
-# dialchallenge
+# MLOps challenge
 
 This is a small minimal AI inference API for image classification
 
