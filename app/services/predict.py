@@ -54,7 +54,16 @@ class DeepLearningModelHandlerScore(object):
 
     @staticmethod
     def loadClasses(classes_fname):
-        return json.load(open("app/models/labels/"+classes_fname))
+
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        parent_dir = os.path.dirname(current_dir)
+
+        classes_fname = os.path.join(
+            parent_dir, "models","labels",
+            classes_fname
+        )
+
+        return json.load(open(classes_fname))
 
     @staticmethod
     def load(load_parameters):

@@ -30,7 +30,7 @@ pylint = "^2.15.0"  # Fixed to a valid version
 optional = true
 
 [tool.poetry.group.aws.dependencies]
-mangum = "^0.14.0"
+mangum = "^0.19.0"
 
 #[[tool.poetry.source]]
 #name = "torch"
