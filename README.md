@@ -63,11 +63,6 @@ Application parts are:
     ├── main-aws-lambda.py  - [Optional] FastAPI application for AWS Lambda creation and configuration.
     └── main.py             - FastAPI application creation and configuration.
     |
-    | # ML stuff
-    ├── data             - where you persist data locally
-    │   ├── interim      - intermediate data that has been transformed.
-    │   ├── processed    - the final, canonical data sets for modeling.
-    │   └── raw          - the original, immutable data dump.
     │
     ├── notebooks        - Jupyter notebooks. Naming convention is a number (for ordering),
     |
