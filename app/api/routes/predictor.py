@@ -39,5 +39,4 @@ async def predict(image: UploadFile = File(...)):
     except Exception as err:
         raise HTTPException(status_code=500, detail=f"Exception: {err}")
 
-    #return MachineLearningResponse(prediction=prediction)
     return JSONResponse(value)
