@@ -23,9 +23,31 @@ MODEL_PATH=./ml/model/
 MODEL_NAME=densenet121
 ```
 
-### Update `/predict`
+## Usecase
 
-To update your machine learning model, add your `load` and `method` [change here](app/api/routes/predictor.py#L19) at `predictor.py`
+### POST `/predict`
+
+A POST request can be done using the following command:
+```
+curl -X POST -H "Content-Type: application/json" -d '{"image": "Image Content goes Here"}' http://localhost:5000/predict
+```
+This returns a JSON response of the following form:
+```
+{"response": "class_name"}
+```
+
+### POST `/predict-form-data`
+
+A POST request can be done such as the image is sent as multipart/form-data using the --form option.
+The request can be done using the following command:
+```
+curl --location 'http://localhost:5000/predict-form-data' \
+--form 'image=@"file_path_of_image.jpeg"'
+```
+This returns a JSON response of the following form:
+```
+{"response": "class_name"}
+```
 
 ## Runnning Localhost
 

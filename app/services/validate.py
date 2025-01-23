@@ -2,7 +2,7 @@ from fastapi import HTTPException
 from fastapi import UploadFile
 
 
-def validate_image(image: UploadFile):
+def validate_image_file(image: UploadFile):
     try:
         if image.content_type not in ["image/jpeg", "image/png"]:
             raise HTTPException(

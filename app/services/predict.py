@@ -5,6 +5,7 @@ from loguru import logger
 from core.errors import PredictException, ModelLoadException
 from core.config import MODEL_NAME, MODEL_PATH
 from models.registry import MODEL_REGISTRY
+from models.prediction import PredictionResponse
 from services.validate import validate_registry
 import torch
 import json
@@ -44,7 +45,7 @@ class DeepLearningModelHandlerScore(object):
                 _, predicted_class = outputs.max(1)
 
             result = cls.classes[predicted_class.item()] if cls.classes is not None else str(predicted_class.item())
-            return {"response":result}
+            return PredictionResponse(response=result)
         except Exception as e:
             logger.error(f"Error predicting: {e}")
             raise PredictException(f"Error predicting: {e}")

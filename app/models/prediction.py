@@ -9,6 +9,10 @@ from fastapi import  UploadFile
 
 ALLOWED_CONTENT_TYPES = ["image/jpeg", "image/png"]
 
+# Define the request model
+class ImageRequest(BaseModel):
+    image: str  # Base64-encoded string
+
 class ImageInput(BaseModel):
     image: UploadFile
 
