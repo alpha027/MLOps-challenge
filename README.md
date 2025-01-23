@@ -1,6 +1,6 @@
 # MLOps challenge
 
-This is a small minimal AI inference API for image classification
+This is a small minimal AI inference API for image classification.
 
 ## Development Requirements
 
@@ -131,3 +131,9 @@ Deploying inference service to AWS Lambda
 `aws cloudformation delete-stack --stack-name <STACK_NAME_ON_CREATION>`
 
 Made by <https://github.com/arthurhenrique/cookiecutter-fastapi/graphs/contributors> with ❤️
+
+
+## References
+
+This pipeline was generated using the [Cookiecutter](https://github.com/arthurhenrique/cookiecutter-fastapi) python module.
+

@@ -6,10 +6,10 @@ services:
       args:
         DEV: "true"
     ports:
-      - "8080:8080"
+      - "5000:5000"
     env_file:
       - .env
-    command: uvicorn main:app --reload --host 0.0.0.0 --port 8080
+    command: uvicorn main:app --reload --host 0.0.0.0 --port 5000
     volumes:
       - ./app:/app/
-      - ./ml/model/:/app/ml/model/
+      # - ./ml/model/:/app/ml/model/

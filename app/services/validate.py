@@ -38,4 +38,4 @@ def validate_registry(registry_dict):
                 )
 
     except AttributeError:
-        raise HTTPException(status_code=400, detail="Registry must be a dictionary")
+        raise HTTPException(status_code=400, detail="Registry dictionary is not valid")
