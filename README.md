@@ -43,7 +43,7 @@ This returns a JSON response of the following form:
 
 ### POST `/predict-form-data`
 
-A POST request can be made such as the image is sent as multipart/form-data using the --form option.
+A POST request can be made such that the image is sent as multipart/form-data using the --form option.
 The request can be done using the following command:
 ```
 curl --location 'http://localhost:5000/predict-form-data' \
