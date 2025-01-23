@@ -23,12 +23,30 @@ def load_model_from_file(fname):
     raise NotImplementedError
 
 
-def get_class_fpath(classes_fname):
+def get_ml_fpath():
+
     current_dir = os.path.dirname(os.path.abspath(__file__))
     parent_dir = os.path.dirname(current_dir)
 
+    ml_fpath = os.path.join(
+        parent_dir, "ml"
+    )
+
+    if not os.path.exists(ml_fpath):
+        parent_dir = os.path.dirname(current_dir)
+
+        ml_fpath = os.path.join(
+            parent_dir, "ml"
+        )
+
+    return ml_fpath
+
+def get_class_fpath(classes_fname):
+
+    ml_dir = get_ml_fpath()
+
     classes_fpath = os.path.join(
-        parent_dir, "models","labels",
+        ml_dir, "models","labels",
         classes_fname
     )
 

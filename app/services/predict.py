@@ -4,8 +4,8 @@ from loguru import logger
 
 from core.errors import PredictException, ModelLoadException
 from core.config import MODEL_NAME, MODEL_PATH
-from models.registry import MODEL_REGISTRY
-from models.prediction import PredictionResponse
+from ml.models.registry import MODEL_REGISTRY
+from ml.models.prediction import PredictionResponse
 from services.validate import validate_registry
 import torch
 import json

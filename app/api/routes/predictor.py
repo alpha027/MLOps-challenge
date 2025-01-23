@@ -2,9 +2,7 @@ from fastapi import (APIRouter, HTTPException,
                      File, UploadFile)
 from services.predict import DeepLearningModelHandlerScore as dl_model
 from services.validate import validate_image_file
-from models.prediction import (
-    PredictionResponse, ImageRequest
-)
+from ml.models.prediction import PredictionResponse, ImageRequest
 import io
 from PIL import Image
 
