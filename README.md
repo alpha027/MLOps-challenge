@@ -11,7 +11,7 @@ This is a small minimal AI inference API for image classification.
 ## Installation
 
 ```sh
-python -m venv venv
+python3.11 -m venv venv # 3.12 works as well
 source venv/bin/activate
 make install
 ```
