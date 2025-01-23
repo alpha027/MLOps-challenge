@@ -19,16 +19,26 @@ class DeepLearningModelHandlerScore(object):
     classes = None
 
     @classmethod
+    def transform(cls, input):
+
+        if cls.registry_name is not None:
+
+            transform = MODEL_REGISTRY[cls.registry_name].get("transform",
+                                                              None)
+
+            if transform is not None:
+                input = transform(input).unsqueeze(0)
+
+        return input
+
+    @classmethod
     def predict(cls, input):
 
         try:
-            if cls.registry_name is not None:
+            # transform input
+            input = cls.transform(input)
 
-                transform = MODEL_REGISTRY[cls.registry_name].get("transform",
-                                                                  None)
-                if transform is not None:
-                    input = transform(input).unsqueeze(0)
-
+            # predict
             with torch.no_grad():
                 outputs = cls.model(input)
                 _, predicted_class = outputs.max(1)

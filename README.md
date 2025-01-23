@@ -12,7 +12,7 @@ This is a small minimal AI inference API for image classification.
 
 ```sh
 MODEL_PATH=./ml/model/
-MODEL_NAME=model.pkl
+MODEL_NAME=densenet121
 ```
 
 ### Update `/predict`
@@ -41,11 +41,11 @@ make install
 
 ## Access Swagger Documentation
 
-> <http://localhost:8080/docs>
+> <http://localhost:5000/docs>
 
 ## Access Redocs Documentation
 
-> <http://localhost:8080/redoc>
+> <http://localhost:5000/redoc>
 
 ## Project structure
 
@@ -58,7 +58,7 @@ Application parts are:
     ├── api                 - web related stuff.
     │   └── routes          - web routes.
     ├── core                - application configuration, startup events, logging.
-    ├── models              - pydantic models for this application.
+    ├── models              - AI models for this application.
     ├── services            - logic that is not just crud related.
     ├── main-aws-lambda.py  - [Optional] FastAPI application for AWS Lambda creation and configuration.
     └── main.py             - FastAPI application creation and configuration.
@@ -71,19 +71,6 @@ Application parts are:
     │
     ├── notebooks        - Jupyter notebooks. Naming convention is a number (for ordering),
     |
-    ├── ml               - modelling source code for use in this project.
-    │   ├── __init__.py  - makes ml a Python module
-    │   ├── pipeline.py  - scripts to orchestrate the whole pipeline
-    │   │
-    │   ├── data         - scripts to download or generate data
-    │   │   └── make_dataset.py
-    │   │
-    │   ├── features     - scripts to turn raw data into features for modeling
-    │   │   └── build_features.py
-    │   │
-    │   └── model        - scripts to train models and make predictions
-    │       ├── predict_model.py
-    │       └── train_model.py
     │
     └── tests            - pytest
 
