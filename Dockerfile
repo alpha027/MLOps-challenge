@@ -15,7 +15,6 @@ ARG DEV=false
 RUN poetry install --with dev --no-root
 
 COPY ./app/ ./
-COPY ./ml/model/ ./ml/model/
 
 ENV PYTHONPATH "${PYTHONPATH}:/app"
 
