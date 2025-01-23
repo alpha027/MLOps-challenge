@@ -16,18 +16,11 @@ source venv/bin/activate
 make install
 ```
 
-### M.L Model Environment
-
-```sh
-MODEL_PATH=./ml/model/
-MODEL_NAME=densenet121
-```
-
 ## Usecase
 
 ### POST `/predict`
 
-A POST request can be done using the following command:
+A POST request can be made using the following command:
 ```
 curl -X POST -H "Content-Type: application/json" -d '{"image": "Image Content goes Here"}' http://localhost:5000/predict
 ```
@@ -38,7 +31,7 @@ This returns a JSON response of the following form:
 
 ### POST `/predict-form-data`
 
-A POST request can be done such as the image is sent as multipart/form-data using the --form option.
+A POST request can be made such as the image is sent as multipart/form-data using the --form option.
 The request can be done using the following command:
 ```
 curl --location 'http://localhost:5000/predict-form-data' \
@@ -68,6 +61,13 @@ This returns a JSON response of the following form:
 ## Access Redocs Documentation
 
 > <http://localhost:5000/redoc>
+
+### M.L Model Environment
+
+```sh
+MODEL_PATH=./ml/model/
+MODEL_NAME=densenet121
+```
 
 ## Project structure
 
