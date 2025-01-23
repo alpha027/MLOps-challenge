@@ -81,7 +81,7 @@ Application parts are:
     ├── api                 - web related stuff.
     │   └── routes          - web routes.
     ├── core                - application configuration, startup events, logging.
-    ├── models              - AI models for this application.
+    ├── models              - Data models for this application.
     ├── services            - logic that is not just crud related.
     ├── main-aws-lambda.py  - [Optional] FastAPI application for AWS Lambda creation and configuration.
     └── main.py             - FastAPI application creation and configuration.
@@ -89,6 +89,7 @@ Application parts are:
     │
     ├── notebooks        - Jupyter notebooks. Naming convention is a number (for ordering),
     |
+    ├── ml               - AI related logic for AI models and classes
     │
     └── tests            - pytest
 
@@ -116,4 +117,4 @@ Made by <https://github.com/arthurhenrique/cookiecutter-fastapi/graphs/contribut
 ## References
 
 This pipeline was generated using the [Cookiecutter](https://github.com/arthurhenrique/cookiecutter-fastapi) python module.
-
+The AI-based classification relies on the [PyTorch](https://pytorch.org/) framework
