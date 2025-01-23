@@ -21,11 +21,30 @@ def get_prediction(data_point):
 
 
 @router.post(
+    "/predict",
+    response_model=PredictionResponse,
+    name="predict:post-prediction-json",
+)
+async def predict(request: ImageRequest):
+    try:
+        # Decode the Base64-encoded image
+        image_data = base64.b64decode(request.image)
+        image = Image.open(BytesIO(image_data))  # Load image into PIL for further processing
+        response = get_prediction(image)
+
+        return response
+    except base64.binascii.Error as e:
+        raise HTTPException(status_code=400, detail="Invalid Base64-encoded image data")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post(
     "/predict-form-data",
     response_model=PredictionResponse,
     name="predict:get-prediction",
 )
-async def predict(image: UploadFile = File(...)):
+async def predict_form_data(image: UploadFile = File(...)):
 
     if not image:
         raise HTTPException(status_code=404, 
@@ -41,22 +60,3 @@ async def predict(image: UploadFile = File(...)):
 
     except Exception as err:
         raise HTTPException(status_code=500, detail=f"Exception: {err}")
-
-
-@router.post(
-    "/predict",
-    response_model=PredictionResponse,
-    name="predict:post-prediction-json",
-)
-async def predict_json(request: ImageRequest):
-    try:
-        # Decode the Base64-encoded image
-        image_data = base64.b64decode(request.image)
-        image = Image.open(BytesIO(image_data))  # Load image into PIL for further processing
-        response = get_prediction(image)
-
-        return response
-    except base64.binascii.Error as e:
-        raise HTTPException(status_code=400, detail="Invalid Base64-encoded image data")
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
