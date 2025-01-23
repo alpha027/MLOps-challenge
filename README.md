@@ -8,6 +8,14 @@ This is a small minimal AI inference API for image classification.
 - Pip
 - Poetry (Python Package Manager)
 
+## Installation
+
+```sh
+python -m venv venv
+source venv/bin/activate
+make install
+```
+
 ### M.L Model Environment
 
 ```sh
@@ -18,14 +26,6 @@ MODEL_NAME=densenet121
 ### Update `/predict`
 
 To update your machine learning model, add your `load` and `method` [change here](app/api/routes/predictor.py#L19) at `predictor.py`
-
-## Installation
-
-```sh
-python -m venv venv
-source venv/bin/activate
-make install
-```
 
 ## Runnning Localhost
 
