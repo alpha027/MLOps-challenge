@@ -16,6 +16,18 @@ source venv/bin/activate
 make install
 ```
 
+## Runnning Localhost
+
+`make run`
+
+## Deploy app
+
+`make deploy`
+
+## Running Tests
+
+`make test`
+
 ## Usecase
 
 ### POST `/predict`
@@ -42,17 +54,6 @@ This returns a JSON response of the following form:
 {"response": "class_name"}
 ```
 
-## Runnning Localhost
-
-`make run`
-
-## Deploy app
-
-`make deploy`
-
-## Running Tests
-
-`make test`
 
 ## Access Swagger Documentation
 
