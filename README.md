@@ -117,4 +117,4 @@ Made by <https://github.com/arthurhenrique/cookiecutter-fastapi/graphs/contribut
 ## References
 
 This pipeline was generated using the [Cookiecutter](https://github.com/arthurhenrique/cookiecutter-fastapi) python module.
-The AI-based classification relies on the [PyTorch](https://pytorch.org/) framework
+The AI-based classification relies on the [PyTorch](https://pytorch.org/) framework.

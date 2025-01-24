@@ -33,7 +33,7 @@ def get_ml_fpath():
     )
 
     if not os.path.exists(ml_fpath):
-        parent_dir = os.path.dirname(current_dir)
+        parent_dir = os.path.dirname(parent_dir)
 
         ml_fpath = os.path.join(
             parent_dir, "ml"
