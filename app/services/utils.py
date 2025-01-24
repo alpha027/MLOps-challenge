@@ -29,17 +29,16 @@ def get_ml_fpath():
     parent_dir = os.path.dirname(current_dir)
 
     ml_fpath = os.path.join(
-        parent_dir, "ml"
+        parent_dir, "ml", "models"
     )
 
     if not os.path.exists(ml_fpath):
         parent_dir = os.path.dirname(parent_dir)
 
-        ml_fpath = os.path.join(
+    return os.path.join(
             parent_dir, "ml"
         )
 
-    return ml_fpath
 
 def get_class_fpath(classes_fname):
 
